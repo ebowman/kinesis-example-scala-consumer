@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright (c) 2013-2014 Snowplow Analytics Ltd. All rights reserved.
  *
  * This program is licensed to you under the Apache License Version 2.0,
@@ -37,8 +37,6 @@ object KinesisExampleScalaConsumerBuild extends Build {
         Libraries.scalaUtil,
         Libraries.scalazon,
         Libraries.specs2,
-        Libraries.commonsLang3,
-        Libraries.thrift,
         Libraries.slf4j,
         Libraries.awsSdk,
         Libraries.kinesisClient

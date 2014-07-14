@@ -14,44 +14,11 @@ import sbt._
 import Keys._
 
 object BuildSettings {
-
-  // Basic settings for our app
-  lazy val basicSettings = Seq[Setting[_]](
+  lazy val buildSettings = Seq[Setting[_]](
     organization          :=  "Snowplow Analytics Ltd",
     version               :=  "0.0.2",
     description           :=  "An example event consumer for Amazon Kinesis",
-    scalaVersion          :=  "2.10.1",
-    scalacOptions         :=  Seq("-deprecation", "-encoding", "utf8",
-                                  "-feature"),
-    scalacOptions in Test :=  Seq("-Yrangepos"),
-    resolvers             ++= Dependencies.resolutionRepos
+    scalaVersion          :=  "2.10.4",
+    scalacOptions         :=  Seq("-deprecation", "-encoding", "utf8", "-feature")
   )
-
-  // Makes our SBT app settings available from within the app
-  lazy val scalifySettings = Seq(sourceGenerators in Compile <+= (sourceManaged in Compile, version, name, organization) map { (d, v, n, o) =>
-    val file = d / "settings.scala"
-    IO.write(file, """package com.snowplowanalytics.kinesis.consumer.generated
-      |object Settings {
-      |  val organization = "%s"
-      |  val version = "%s"
-      |  val name = "%s"
-      |}
-      |""".stripMargin.format(o, v, n))
-    Seq(file)
-  })
-
-  // sbt-assembly settings for building a fat jar
-  import sbtassembly.Plugin._
-  import AssemblyKeys._
-  lazy val sbtAssemblySettings = assemblySettings ++ Seq(
-    // Slightly cleaner jar name
-    jarName in assembly := {
-      name.value + "-" + version.value + ".jar"
-    }
-  )
-
-  import com.github.bigtoast.sbtthrift.ThriftPlugin
-
-  lazy val buildSettings = basicSettings ++ scalifySettings ++
-    sbtAssemblySettings ++ ThriftPlugin.thriftSettings
 }

@@ -39,9 +39,6 @@ object Dependencies {
     val scalazon   = "0.5"
     // Scala (test only)
     val specs2     = "2.3.4"
-    // Scala compile only for sbt-thrift.
-    val commonsLang3 = "3.1"
-    val thrift = "0.9.0"
     // Add versions for your additional libraries here...
   }
 
@@ -61,9 +58,6 @@ object Dependencies {
     val scalazon    = "io.github.cloudify"         %% "scalazon"        % V.scalazon
     // Scala (test only)
     val specs2      = "org.specs2"                 %% "specs2"          % V.specs2     % "test"
-    // Scala compile only for sbt-thrift.
-    val commonsLang3 = "org.apache.commons" % "commons-lang3" % V.commonsLang3 % "compile"
-    val thrift = "org.apache.thrift" % "libthrift" % V.thrift % "compile"
     // Add additional libraries from mvnrepository.com (SBT syntax) here...
   }
 }
