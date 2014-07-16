@@ -32,7 +32,7 @@ class ConsumerWorker(config: ConsumerConfig) {
 
   import config._
 
-  val kinesisClientLibConfiguration = new KinesisClientLibConfiguration(appName, streamName, config.credentials, workerId
+  val kinesisClientLibConfiguration = new KinesisClientLibConfiguration(appName + util.Random.nextInt(), streamName, config.credentials, workerId
   ).withInitialPositionInStream(InitialPositionInStream.valueOf(initialPosition))
 
   println(s"Running: $appName.")

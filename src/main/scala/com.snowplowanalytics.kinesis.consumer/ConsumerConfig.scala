@@ -20,14 +20,18 @@
 
 package com.snowplowanalytics.kinesis.consumer
 
-import com.amazonaws.auth.{AWSCredentialsProvider, BasicAWSCredentials}
+import com.amazonaws.auth.{AWSCredentials, AWSCredentialsProvider, BasicAWSCredentials}
 import com.typesafe.config.Config
 
 
-case class Credentials(accessKey: String, secretKey: String) extends AWSCredentialsProvider {
+case class Credentials(accessKey: String, secretKey: String) extends AWSCredentialsProvider with AWSCredentials {
   val getCredentials = new BasicAWSCredentials(accessKey, secretKey)
 
   def refresh() = {}
+
+  override def getAWSAccessKeyId: String = accessKey
+
+  override def getAWSSecretKey: String = secretKey
 }
 
 class ConsumerConfig(config: Config) {
@@ -36,9 +40,11 @@ class ConsumerConfig(config: Config) {
   val streamName = stream.getString("stream-name")
   val appName = stream.getString("app-name")
   val initialPosition = stream.getString("initial-position")
+  val endpoint = stream.getString("endpoint")
 
   val accessKey = sys.env("AWS_ACCESS_KEY_ID")
   val secretKey = sys.env("AWS_SECRET_ACCESS_KEY")
+  val region = sys.env("AWS_REGION")
 
   lazy val credentials = Credentials(accessKey, secretKey)
 }

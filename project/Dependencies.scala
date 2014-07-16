@@ -58,6 +58,7 @@ object Dependencies {
     val scalazon    = "io.github.cloudify"         %% "scalazon"        % V.scalazon
     // Scala (test only)
     val specs2      = "org.specs2"                 %% "specs2"          % V.specs2     % "test"
+    val akka =        "com.typesafe.akka"          %% "akka-actor"      % "2.3.4"
     // Add additional libraries from mvnrepository.com (SBT syntax) here...
   }
 }
